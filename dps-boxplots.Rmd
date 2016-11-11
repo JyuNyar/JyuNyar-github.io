@@ -1,0 +1,159 @@
+---
+title: "Emerald Nightmare DPS Comparison - Heroic"
+author: "JyuNyar"
+date: "November 10, 2016"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    keep_md: true
+---
+
+```{r setup,echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(ggplot2)
+library(plyr)
+library(dplyr)
+parses=read.csv("C:/Users/JyuNyar/Documents/R-Studio/WoW/parses.csv")
+parses.filtered=parses%>%group_by(spec2,Fight,difficulty)%>%mutate(Count=n(),Omit=ifelse(Count<100,1,0))%>%filter(Omit==0,itemLevel>839)%>%ungroup()%>%group_by(spec2)%>%mutate(fullMedian=median(total))%>%ungroup()%>%group_by(spec2,Fight,difficulty)%>%mutate(lower = (median(total)-2.5*mad(total)),medianDPS=median(total),upper = (median(total)+2.5*mad(total)))%>%ungroup()%>%mutate(Outlier=ifelse(total<lower,1,ifelse(total>upper,1,0)))%>%filter(Outlier==0)
+```
+
+#Data Summary
+
+Item level Distribution Heroic: 
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(plyr)
+library(dplyr)
+```
+
+##Data Cleanup
+
+Data was cleaned using the median absolute deviation. For each spec + fight + difficulty combination, an exclusion criterion was calculated as follows:
+
+$$Lower Bound = median - 2.5*MAD$$
+$$Upper Bound = median + 2.5*MAD$$
+
+Observations that fell either below the lower bound, or above the upper bound, were excluded.
+
+```{r data_setup, message=FALSE, warning=FALSE}
+parses=parses%>%filter(itemLevel>839)
+
+parses.filtered=parses%>%
+  group_by(spec2,Fight,difficulty)%>%
+  mutate(
+    Count=n(),
+    Omit=ifelse(Count<100,1,0))%>%
+  filter(Omit==0,itemLevel>839)%>%
+  ungroup()%>%
+  group_by(spec2)%>%
+  mutate(
+    fullMedian=median(total))%>%
+  ungroup()%>%
+  group_by(spec2,Fight,difficulty)%>%
+  mutate(
+    lower = (median(total)-2.5*mad(total)),
+    medianDPS=median(total),
+    upper = (median(total)+2.5*mad(total)))%>%
+  ungroup()%>%
+  mutate(
+    Outlier=ifelse(total<lower,1,
+                   ifelse(total>upper,1,0)))%>%
+  filter(Outlier==0)
+```
+
+Plotting function:
+
+```{r boxplot_function}
+boxplot=function(fight,difficulty,pal,data){
+    ggplot(
+      data%>%
+        filter(Fight==fight,difficulty==difficulty),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+    geom_boxplot(lwd=1)+
+    scale_colour_manual(values=pal)+
+    theme(
+      axis.text.x=element_text(angle=90,vjust=1),
+      axis.title.x=element_blank(),
+      text=element_text(size=16))+
+    labs(title=fight)
+}
+```
+
+Palette:
+```{r palette}
+palette.alphabetical=c("#9482C9","#69CCF0","#C79C6E","#EDC84F","#FF7D0A","#ABD473","#7661B2","#BDAEE8","#0070DE","#63AAF0","#FFAA60","#2AC1F8","#48AACD","#C41F3B","#9B7954","#A330C9","#8BD428","#FFC300","#F58CBA","#000000","#E3C153","#BDD69A","#97001A","#00FF96")
+```
+
+#Heroic {.tabset}
+##Heroic Nythendra
+```{r heroic_nyth,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Nythendra","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Il'gynoth
+```{r heroic_gynotht,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Il'gynoth","Heroic",palette.alphabetical,parses.filtered)
+
+```
+
+##Heroic Dragons of Nightmare
+```{r heroic_dragons,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Dragons of Nightmare","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Renferal
+```{r heroic_renf,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Renferal","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Ursoc
+```{r heroic_ursoc,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Ursoc","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Cenarius
+```{r heroic_cenarius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Cenarius","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Xavius
+```{r heroic_xavius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Xavius","Heroic",palette.alphabetical,parses.filtered)
+```
+
+#Mythic {.tabset}
+##Mythic Nythendra
+```{r Mythic_nyth,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Nythendra","Mythic",palette.alphabetical,parses.filtered)
+```
+
+##Mythic Il'gynoth
+```{r Mythic_gynotht,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Il'gynoth","Mythic",palette.alphabetical,parses.filtered)
+
+```
+
+##Mythic Dragons of Nightmare
+```{r Mythic_dragons,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Dragons of Nightmare","Mythic",palette.alphabetical,parses.filtered)
+```
+
+##Mythic Renferal
+```{r Mythic_renf,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Renferal","Mythic",palette.alphabetical,parses.filtered)
+```
+
+##Mythic Ursoc
+```{r Mythic_ursoc,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Ursoc","Mythic",palette.alphabetical,parses.filtered)
+```
+
+##Mythic Cenarius
+```{r Mythic_cenarius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Cenarius","Mythic",palette.alphabetical,parses.filtered)
+```
+
+##Mythic Xavius
+```{r Mythic_xavius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Xavius","Mythic",palette.alphabetical,parses.filtered)
+```

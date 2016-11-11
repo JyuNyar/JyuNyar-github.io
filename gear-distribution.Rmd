@@ -1,0 +1,53 @@
+---
+title: "Gear Distributions"
+author: "JyuNyar"
+date: "November 10, 2016"
+output: 
+html_document:
+  keep_md: true
+  toc: true
+  toc_float: true
+---
+
+```{r setup,echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(printr)
+library(dplyr)
+parses=read.csv("C:/Users/JyuNyar/Documents/R-Studio/WoW/parses.csv")
+parses=parses%>%filter(itemLevel>839)
+```
+
+#Data Summary
+
+Item level Distribution Heroic: 
+
+```{r libraries}
+library(ggplot2)
+library(plyr)
+library(dplyr)
+```
+
+
+###Heroic ilvl Distribution
+```{r heroic_hist,fig.width=6,fig.height=5,dpi=200}
+ggplot(parses%>%filter(difficulty=="Heroic"),aes(x=itemLevel))+geom_histogram(binwidth=1)+ggtitle("ilvl Distrution for all Heroic Parses")
+```
+
+###Mythic ilvl Distribution
+```{r mythic_hist,fig.width=6,fig.height=5,dpi=200}
+ggplot(parses%>%filter(difficulty=="Mythic"),aes(x=itemLevel))+geom_histogram(binwidth=1)+ggtitle("ilvl Distrution for all Mythic Parses")
+```
+
+###Heroic vs Mytich Density plot of Item Level distribution:
+```{r comparison_density,fig.width=8,fig.height=4,dpi=300}
+# Create Data
+ grid <- with(parses, seq(min(itemLevel), max(itemLevel), length = 1000))
+normaldens <- ddply(parses, "difficulty", function(df) {
+  data.frame( 
+    itemLevel = grid,
+    density = dnorm(grid, mean(df$itemLevel), sd(df$itemLevel))
+  )
+})
+# Plot Data
+ ggplot(normaldens,aes(x=itemLevel,y=density,color=difficulty))+geom_line(size=.75)
+```
+
