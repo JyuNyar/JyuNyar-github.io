@@ -1,5 +1,5 @@
 ---
-title: "Emerald Nightmare DPS Comparison - Heroic"
+title: "Nighthold DPS Comparison - Heroic"
 author: "JyuNyar"
 date: "Jan 22, 2017"
 output: 
@@ -21,7 +21,6 @@ parses.filtered=parses%>%group_by(spec2,Fight,difficulty)%>%mutate(Count=n(),Omi
 
 Item level Distribution Heroic: 
 
-<<<<<<< HEAD
 ###Heroic ilvl Distribution
 ```{r heroic_hist,fig.width=6,fig.height=5,dpi=200}
 ggplot(parses%>%filter(difficulty=="Heroic",itemLevel>865),aes(x=itemLevel))+geom_histogram(binwidth=1)+ggtitle("ilvl Distrution for all Heroic Parses")
@@ -33,8 +32,6 @@ ggplot(parses%>%filter(difficulty=="Mythic",itemLevel>865),aes(x=itemLevel))+geo
 ```
 
 
-=======
->>>>>>> origin/master
 ##Data Cleanup
 
 Data was cleaned using the median absolute deviation. For each spec + fight + difficulty combination, an exclusion criterion was calculated as follows:
@@ -45,14 +42,12 @@ $$Upper Bound = median + 2.5*MAD$$
 Observations that fell either below the lower bound, or above the upper bound, were excluded.
 
 ```{r data_setup, message=FALSE, warning=FALSE}
-parses=parses%>%filter(itemLevel>839)
-
 parses.filtered=parses%>%
   group_by(spec2,Fight,difficulty)%>%
   mutate(
     Count=n(),
     Omit=ifelse(Count<100,1,0))%>%
-  filter(Omit==0,itemLevel>839)%>%
+  filter(Omit==0,itemLevel>865)%>%
   ungroup()%>%
   group_by(spec2)%>%
   mutate(
@@ -73,10 +68,10 @@ parses.filtered=parses%>%
 Plotting function:
 
 ```{r boxplot_function}
-boxplot=function(fight,difficulty,pal,data){
+boxplot=function(fight,diff,pal,data){
     ggplot(
       data%>%
-        filter(Fight==fight,difficulty==difficulty),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+        filter(Fight==fight,difficulty==diff),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
     geom_boxplot(lwd=1)+
     scale_colour_manual(values=pal)+
     theme(
@@ -110,11 +105,7 @@ boxplot("Trilliax","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic Spellblade Aluriel
-<<<<<<< HEAD
 ```{r heroic_aluriel,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-=======
-```{r heroic_renf,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
->>>>>>> origin/master
 boxplot("Spellblade Aluriel","Heroic",palette.alphabetical,parses.filtered)
 ```
 
@@ -124,16 +115,12 @@ boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic Krosus
-```{r heroic_cenarius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+```{r heroic_krosus,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
 boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic High Botanist Tel'arn
-<<<<<<< HEAD
 ```{r heroic_botanist,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-=======
-```{r heroic_xavius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
->>>>>>> origin/master
 boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
 ```
 
@@ -149,11 +136,7 @@ boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 
 #Mythic {.tabset}
 ##Mythic Skorpyron
-<<<<<<< HEAD
 ```{r Mythic_skorpyron,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-=======
-```{r Mythic_nyth,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
->>>>>>> origin/master
 boxplot("Skorpyron","Mythic",palette.alphabetical,parses.filtered)
 ```
 

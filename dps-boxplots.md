@@ -1,4 +1,4 @@
-# Emerald Nightmare DPS Comparison - Heroic
+# Nighthold DPS Comparison - Heroic
 JyuNyar  
 Jan 22, 2017  
 
@@ -8,7 +8,6 @@ Jan 22, 2017
 
 Item level Distribution Heroic: 
 
-<<<<<<< HEAD
 ###Heroic ilvl Distribution
 
 ```r
@@ -26,8 +25,6 @@ ggplot(parses%>%filter(difficulty=="Mythic",itemLevel>865),aes(x=itemLevel))+geo
 ![](dps-boxplots_files/figure-html/mythic_hist-1.png)<!-- -->
 
 
-=======
->>>>>>> origin/master
 ##Data Cleanup
 
 Data was cleaned using the median absolute deviation. For each spec + fight + difficulty combination, an exclusion criterion was calculated as follows:
@@ -39,14 +36,12 @@ Observations that fell either below the lower bound, or above the upper bound, w
 
 
 ```r
-parses=parses%>%filter(itemLevel>839)
-
 parses.filtered=parses%>%
   group_by(spec2,Fight,difficulty)%>%
   mutate(
     Count=n(),
     Omit=ifelse(Count<100,1,0))%>%
-  filter(Omit==0,itemLevel>839)%>%
+  filter(Omit==0,itemLevel>865)%>%
   ungroup()%>%
   group_by(spec2)%>%
   mutate(
@@ -68,10 +63,10 @@ Plotting function:
 
 
 ```r
-boxplot=function(fight,difficulty,pal,data){
+boxplot=function(fight,diff,pal,data){
     ggplot(
       data%>%
-        filter(Fight==fight,difficulty==difficulty),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+        filter(Fight==fight,difficulty==diff),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
     geom_boxplot(lwd=1)+
     scale_colour_manual(values=pal)+
     theme(
@@ -135,7 +130,7 @@ boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_cenarius-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_krosus-1.png)<!-- -->
 
 ##Heroic High Botanist Tel'arn
 
@@ -143,7 +138,7 @@ boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_xavius-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_botanist-1.png)<!-- -->
 
 ##Heroic Grand Magistrix Elisande
 
@@ -163,7 +158,6 @@ boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 
 #Mythic {.tabset}
 ##Mythic Skorpyron
-<<<<<<< HEAD
 
 ```r
 boxplot("Skorpyron","Mythic",palette.alphabetical,parses.filtered)
@@ -183,11 +177,6 @@ boxplot("Chronomatic Anomaly","Mythic",palette.alphabetical,parses.filtered)
 
 ```r
 boxplot("Trilliax","Mythic",palette.alphabetical,parses.filtered)
-=======
-
-```r
-boxplot("Skorpyron","Mythic",palette.alphabetical,parses.filtered)
->>>>>>> origin/master
 ```
 
 ![](dps-boxplots_files/figure-html/Mythic_trilliax-1.png)<!-- -->
