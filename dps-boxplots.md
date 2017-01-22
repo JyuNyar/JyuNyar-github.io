@@ -84,6 +84,22 @@ palette.alphabetical=c("#9482C9","#69CCF0","#C79C6E","#EDC84F","#FF7D0A","#ABD47
 ```
 
 #Heroic {.tabset}
+##Overall
+
+```r
+ggplot(
+      parses.filtered%>%filter(difficulty=="Heroic"),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+    geom_boxplot(lwd=1)+
+    scale_colour_manual(values=palette.alphabetical)+
+    theme(
+      axis.text.x=element_text(angle=90,vjust=1),
+      axis.title.x=element_blank(),
+      text=element_text(size=16))+
+    labs(title="Heroic Nighthold")
+```
+
+![](dps-boxplots_files/figure-html/heroic_all-1.png)<!-- -->
+
 ##Heroic Skorpyron
 
 ```r
@@ -157,6 +173,22 @@ boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 ![](dps-boxplots_files/figure-html/heroic_guldan-1.png)<!-- -->
 
 #Mythic {.tabset}
+##Overall
+
+```r
+ggplot(
+      parses.filtered%>%filter(difficulty=="Heroic"),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+    geom_boxplot(lwd=1)+
+    scale_colour_manual(values=palette.alphabetical)+
+    theme(
+      axis.text.x=element_text(angle=90,vjust=1),
+      axis.title.x=element_blank(),
+      text=element_text(size=16))+
+    labs(title="Mythic Nighthold")
+```
+
+![](dps-boxplots_files/figure-html/Mythic_all-1.png)<!-- -->
+
 ##Mythic Skorpyron
 
 ```r
