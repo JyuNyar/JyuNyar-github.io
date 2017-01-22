@@ -87,8 +87,9 @@ palette.alphabetical=c("#9482C9","#69CCF0","#C79C6E","#EDC84F","#FF7D0A","#ABD47
 ##Overall
 
 ```r
+parses.filtered=parses.filtered%>%ungroup()%>%group_by(spec2)%>%mutate(medianDPSOverall=median(total))
 ggplot(
-      parses.filtered%>%filter(difficulty=="Heroic"),aes(x=reorder(spec2,medianDPS),y=total,color=spec2))+
+      parses.filtered%>%filter(difficulty=="Heroic"),aes(x=reorder(spec2,medianDPSOverall),y=total,color=spec2))+
     geom_boxplot(lwd=1)+
     scale_colour_manual(values=palette.alphabetical)+
     theme(
