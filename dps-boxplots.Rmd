@@ -1,5 +1,5 @@
 ---
-title: "Nighthold DPS Comparison - Heroic"
+title: "Emerald Nightmare DPS Comparison - Heroic"
 author: "JyuNyar"
 date: "November 10, 2016"
 output: 
@@ -20,12 +20,6 @@ parses.filtered=parses%>%group_by(spec2,Fight,difficulty)%>%mutate(Count=n(),Omi
 #Data Summary
 
 Item level Distribution Heroic: 
-
-```{r libraries, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(plyr)
-library(dplyr)
-```
 
 ##Data Cleanup
 
@@ -101,9 +95,9 @@ boxplot("Chronomatic Anomaly","Heroic",palette.alphabetical,parses.filtered)
 boxplot("Trilliax","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Spellbalde Aluriel
+##Heroic Spellblade Aluriel
 ```{r heroic_renf,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Spellbalde Aluriel","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Spellblade Aluriel","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic Tichondrius
@@ -112,29 +106,29 @@ boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic Krosus
-```{r heroic_krosus,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+```{r heroic_cenarius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
 boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Botanist
-```{r heroic_botanist,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+##Heroic High Botanist Tel'arn
+```{r heroic_xavius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
 boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Elisande
+##Heroic Grand Magistrix Elisande
 ```{r heroic_elisande,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
 boxplot("Grand Magistrix Elisande","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ##Heroic Gul'dan
-```{r heroic_cguldan,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+```{r heroic_guldan,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
 boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 #Mythic {.tabset}
-##Mythic Nythendra
+##Mythic Skorpyron
 ```{r Mythic_nyth,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Nythendra","Mythic",palette.alphabetical,parses.filtered)
+boxplot("Skorpyron","Mythic",palette.alphabetical,parses.filtered)
 ```
 
 ##Mythic Il'gynoth

@@ -1,4 +1,4 @@
-# Nighthold DPS Comparison - Heroic
+# Emerald Nightmare DPS Comparison - Heroic
 JyuNyar  
 November 10, 2016  
 
@@ -7,13 +7,6 @@ November 10, 2016
 #Data Summary
 
 Item level Distribution Heroic: 
-
-
-```r
-library(ggplot2)
-library(plyr)
-library(dplyr)
-```
 
 ##Data Cleanup
 
@@ -100,10 +93,10 @@ boxplot("Trilliax","Heroic",palette.alphabetical,parses.filtered)
 
 ![](dps-boxplots_files/figure-html/heroic_dragons-1.png)<!-- -->
 
-##Heroic Spellbalde Aluriel
+##Heroic Spellblade Aluriel
 
 ```r
-boxplot("Spellbalde Aluriel","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Spellblade Aluriel","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_renf-1.png)<!-- -->
@@ -122,17 +115,17 @@ boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_krosus-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_cenarius-1.png)<!-- -->
 
-##Heroic Botanist
+##Heroic High Botanist Tel'arn
 
 ```r
 boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_botanist-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_xavius-1.png)<!-- -->
 
-##Heroic Elisande
+##Heroic Grand Magistrix Elisande
 
 ```r
 boxplot("Grand Magistrix Elisande","Heroic",palette.alphabetical,parses.filtered)
@@ -146,13 +139,13 @@ boxplot("Grand Magistrix Elisande","Heroic",palette.alphabetical,parses.filtered
 boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_cguldan-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_guldan-1.png)<!-- -->
 
 #Mythic {.tabset}
-##Mythic Nythendra
+##Mythic Skorpyron
 
 ```r
-boxplot("Nythendra","Mythic",palette.alphabetical,parses.filtered)
+boxplot("Skorpyron","Mythic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/Mythic_nyth-1.png)<!-- -->
