@@ -1,5 +1,5 @@
 ---
-title: "Emerald Nightmare DPS Comparison - Heroic"
+title: "Nighthold DPS Comparison - Heroic"
 author: "JyuNyar"
 date: "November 10, 2016"
 output: 
@@ -85,40 +85,50 @@ palette.alphabetical=c("#9482C9","#69CCF0","#C79C6E","#EDC84F","#FF7D0A","#ABD47
 ```
 
 #Heroic {.tabset}
-##Heroic Nythendra
+##Heroic Skorpyron
 ```{r heroic_nyth,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Nythendra","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Skorpyron","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Il'gynoth
+##Heroic Chronomatic Anomaly
 ```{r heroic_gynotht,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Il'gynoth","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Chronomatic Anomaly","Heroic",palette.alphabetical,parses.filtered)
 
 ```
 
-##Heroic Dragons of Nightmare
+##Heroic Trilliax
 ```{r heroic_dragons,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Dragons of Nightmare","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Trilliax","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Renferal
+##Heroic Spellbalde Aluriel
 ```{r heroic_renf,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Renferal","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Spellbalde Aluriel","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Ursoc
+##Heroic Tichondrius
 ```{r heroic_ursoc,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Ursoc","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Cenarius
-```{r heroic_cenarius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Cenarius","Heroic",palette.alphabetical,parses.filtered)
+##Heroic Krosus
+```{r heroic_krosus,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-##Heroic Xavius
-```{r heroic_xavius,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
-boxplot("Xavius","Heroic",palette.alphabetical,parses.filtered)
+##Heroic Botanist
+```{r heroic_botanist,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Elisande
+```{r heroic_elisande,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Grand Magistrix Elisande","Heroic",palette.alphabetical,parses.filtered)
+```
+
+##Heroic Gul'dan
+```{r heroic_cguldan,fig.width=14,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 #Mythic {.tabset}

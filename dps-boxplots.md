@@ -1,4 +1,4 @@
-# Emerald Nightmare DPS Comparison - Heroic
+# Nighthold DPS Comparison - Heroic
 JyuNyar  
 November 10, 2016  
 
@@ -76,61 +76,77 @@ palette.alphabetical=c("#9482C9","#69CCF0","#C79C6E","#EDC84F","#FF7D0A","#ABD47
 ```
 
 #Heroic {.tabset}
-##Heroic Nythendra
+##Heroic Skorpyron
 
 ```r
-boxplot("Nythendra","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Skorpyron","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_nyth-1.png)<!-- -->
 
-##Heroic Il'gynoth
+##Heroic Chronomatic Anomaly
 
 ```r
-boxplot("Il'gynoth","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Chronomatic Anomaly","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_gynotht-1.png)<!-- -->
 
-##Heroic Dragons of Nightmare
+##Heroic Trilliax
 
 ```r
-boxplot("Dragons of Nightmare","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Trilliax","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_dragons-1.png)<!-- -->
 
-##Heroic Renferal
+##Heroic Spellbalde Aluriel
 
 ```r
-boxplot("Renferal","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Spellbalde Aluriel","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_renf-1.png)<!-- -->
 
-##Heroic Ursoc
+##Heroic Tichondrius
 
 ```r
-boxplot("Ursoc","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Tichondrius","Heroic",palette.alphabetical,parses.filtered)
 ```
 
 ![](dps-boxplots_files/figure-html/heroic_ursoc-1.png)<!-- -->
 
-##Heroic Cenarius
+##Heroic Krosus
 
 ```r
-boxplot("Cenarius","Heroic",palette.alphabetical,parses.filtered)
+boxplot("Krosus","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_cenarius-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_krosus-1.png)<!-- -->
 
-##Heroic Xavius
+##Heroic Botanist
 
 ```r
-boxplot("Xavius","Heroic",palette.alphabetical,parses.filtered)
+boxplot("High Botanist Tel'arn","Heroic",palette.alphabetical,parses.filtered)
 ```
 
-![](dps-boxplots_files/figure-html/heroic_xavius-1.png)<!-- -->
+![](dps-boxplots_files/figure-html/heroic_botanist-1.png)<!-- -->
+
+##Heroic Elisande
+
+```r
+boxplot("Grand Magistrix Elisande","Heroic",palette.alphabetical,parses.filtered)
+```
+
+![](dps-boxplots_files/figure-html/heroic_elisande-1.png)<!-- -->
+
+##Heroic Gul'dan
+
+```r
+boxplot("Gul'dan","Heroic",palette.alphabetical,parses.filtered)
+```
+
+![](dps-boxplots_files/figure-html/heroic_cguldan-1.png)<!-- -->
 
 #Mythic {.tabset}
 ##Mythic Nythendra
