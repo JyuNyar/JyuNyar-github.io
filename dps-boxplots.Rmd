@@ -1,7 +1,7 @@
 ---
 title: "Nighthold DPS Comparison - Heroic"
 author: "JyuNyar"
-date: "Jan 22, 2017"
+date: "Feb 2, 2017"
 output: 
   html_document:
     toc: true

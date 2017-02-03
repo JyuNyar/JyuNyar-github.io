@@ -1,6 +1,6 @@
 # Nighthold DPS Comparison - Heroic
 JyuNyar  
-Jan 22, 2017  
+Feb 2, 2017  
 
 
 
