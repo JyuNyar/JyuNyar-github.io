@@ -1,0 +1,140 @@
+---
+title: "NYPD Crime Data"
+author: "Ben Goldy"
+date: "April 5, 2017"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    keep_md: true
+---
+
+```{r setup,echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(data.table)
+library(dtplyr)
+library(dplyr)
+library(ggplot2)
+library(spatstat)
+library(gridExtra)
+Felony=fread("Felony.csv")
+Felony$CompStatMonth=factor(Felony$CompStatMonth,levels=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"))
+Felony$OccurrenceMonth=factor(Felony$OccurrenceMonth,levels=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"))
+Felony$Borough=as.factor(Felony$Borough)
+```
+#Descriptives {.tabset}
+##Occurence Year
+```{r summary_year,fig.width=3,fig.height=3,dpi=200 ,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=OccurrenceYear))+
+  geom_histogram()+xlab("Year")
+```
+
+Its fairly clear that the present data is mostly from one year: 2015.
+
+##Occurence Month
+```{r summary_occmonth,fig.width=4,fig.height=3,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=OccurrenceMonth))+
+  geom_histogram(stat="count")+
+  xlab("Month")
+```
+
+##Reported Month
+```{r summary_reportedmonth,fig.width=3.75,fig.height=3,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=CompStatMonth))+
+  geom_histogram(stat="count")+
+  xlab("Month")
+```
+
+Interestingly, October, November and December have no reported incidents, even though those months have crime occurences. Given that the distrubtions are the same for the months that present, it seems safe to say this an error with the present data.
+
+##Crime Type
+```{r summary_crimetype,fig.width=3,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+crimetype=Felony%>%
+  group_by(Offense)%>%
+  mutate(Count=n())
+
+ggplot(crimetype,
+       aes(x=reorder(Offense,
+                     Count)))+
+  geom_histogram(stat="count")+
+  xlab("Crime Type")+
+  theme(
+    axis.text.x=element_text(angle=90,vjust=1),
+    text=element_text(size=8))
+```
+
+#Borough Interactions {.tabset}
+##Total Crime by Borough
+```{r borough_totalCrime,fig.width=4,fig.height=3,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=Borough))+
+  geom_histogram(stat="count")+
+  xlab("Borough")+
+  theme(
+    axis.text.x=element_text(angle=90),
+    text=element_text(size=8))
+```
+
+Again we see some errors in the data with missing borough classifications. Despite that crime rates in Staten Island are far lower than elshwere. Of the five boroughs, Brookly has the most reported crime.
+
+##Borough by Crime Type
+```{r borough_crimetype,fig.width=4,fig.height=5,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=Offense))+
+  geom_histogram(stat="count")+
+  xlab("Crime Type")+
+  facet_grid(~Borough)+
+  theme(
+    axis.text.x=element_text(angle=90),
+    text=element_text(size=8))
+```
+
+The distribution of crime according to its type is relatively consistent accross the five boroughs. Grand Larceny is the most represented crime type by a large margin in all five boroughs. Furthermore, Felony assault is the second most common form of crime in all five boroughs.
+
+##Borough by Month
+```{r summary_borough_by_month,fig.width=6,fig.height=3.5,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony,
+       aes(x=OccurrenceMonth))+
+  geom_histogram(stat="count")+
+  xlab("Month")+
+  facet_grid(~Borough)+
+  theme(
+    axis.text.x=element_text(angle=90),
+    text=element_text(size=8))
+```
+
+#Spatial Data {.tabset}
+Given the above results, there does not appear to be a strong difference between the five boroughs in terms of when crime occurs or what type of crimes are likely to occur. There is however differences in the absolute number of occurences.
+
+But what about spatially? We'll plot the x,y coordinate data to get a sense of where the crimes being reported are coming from:
+
+##All Spatial Data
+```{r map,fig.width=3.25,fig.height=4,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony%>%
+         filter(OccurrenceYear==2015),
+       aes(x=XCoordinate,
+           y=YCoordinate))+
+  geom_point()
+```
+
+##Colored by Borough
+```{r map_color,fig.width=5,fig.height=4,dpi=200,message=FALSE, warning=FALSE}
+ggplot(Felony%>%
+         filter(OccurrenceYear==2015),
+       aes(x=XCoordinate,
+           y=YCoordinate,
+           color=Borough))+
+  geom_point()
+```
+
+#Crime Patterns Overview
+
+The next natural question to ask is: "are there differences in where the various types of crime are committed within a given borough?".
+
+```{r spatialpattern,fig.width=12,fig.height=10,dpi=300}
+ggplot(Felony%>%filter(Borough!=""),aes(x=XCoordinate,y=YCoordinate))+geom_density2d()+facet_grid(Borough~Offense,labeller=label_both)
+```
+
+Broadly speaking there does appear to be differences in centers of activity for the various types of crimes. Investigation into what factors may be driving these differences could be of use in a variety of contexts but is outside the scope of what is possible given the present data.
