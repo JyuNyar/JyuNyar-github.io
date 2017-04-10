@@ -38,8 +38,6 @@ ggplot(Felony,
 
 ![](NYPD-Crime_Data_html_files/figure-html/summary_reportedmonth-1.png)<!-- -->
 
-Interestingly, October, November and December have no reported incidents, even though those months have crime occurences. Given that the distrubtions are the same for the months that present, it seems safe to say this an error with the present data.
-
 ##Crime Type
 
 ```r
@@ -74,8 +72,6 @@ ggplot(Felony,
 
 ![](NYPD-Crime_Data_html_files/figure-html/borough_totalCrime-1.png)<!-- -->
 
-Again we see some errors in the data with missing borough classifications. Despite that crime rates in Staten Island are far lower than elshwere. Of the five boroughs, Brookly has the most reported crime.
-
 ##Borough by Crime Type
 
 ```r
@@ -90,8 +86,6 @@ ggplot(Felony,
 ```
 
 ![](NYPD-Crime_Data_html_files/figure-html/borough_crimetype-1.png)<!-- -->
-
-The distribution of crime according to its type is relatively consistent accross the five boroughs. Grand Larceny is the most represented crime type by a large margin in all five boroughs. Furthermore, Felony assault is the second most common form of crime in all five boroughs.
 
 ##Borough by Month
 
@@ -109,10 +103,6 @@ ggplot(Felony,
 ![](NYPD-Crime_Data_html_files/figure-html/summary_borough_by_month-1.png)<!-- -->
 
 #Spatial Data {.tabset}
-Given the above results, there does not appear to be a strong difference between the five boroughs in terms of when crime occurs or what type of crimes are likely to occur. There is however differences in the absolute number of occurences.
-
-But what about spatially? We'll plot the x,y coordinate data to get a sense of where the crimes being reported are coming from:
-
 ##All Spatial Data
 
 ```r
@@ -138,10 +128,20 @@ ggplot(Felony%>%
 
 ![](NYPD-Crime_Data_html_files/figure-html/map_color-1.png)<!-- -->
 
+##Colored by Precinct
+
+```r
+ggplot(Felony%>%
+         filter(OccurrenceYear==2015),
+       aes(x=XCoordinate,
+           y=YCoordinate,
+           color=as.factor(Precinct)))+
+  geom_point()
+```
+
+![](NYPD-Crime_Data_html_files/figure-html/map_color_prcnct-1.png)<!-- -->
+
 #Crime Patterns Overview
-
-The next natural question to ask is: "are there differences in where the various types of crime are committed within a given borough?".
-
 
 ```r
 ggplot(Felony%>%filter(Borough!=""),aes(x=XCoordinate,y=YCoordinate))+geom_density2d()+facet_grid(Borough~Offense,labeller=label_both)
@@ -149,4 +149,5 @@ ggplot(Felony%>%filter(Borough!=""),aes(x=XCoordinate,y=YCoordinate))+geom_densi
 
 ![](NYPD-Crime_Data_html_files/figure-html/spatialpattern-1.png)<!-- -->
 
-Broadly speaking there does appear to be differences in centers of activity for the various types of crimes. Investigation into what factors may be driving these differences could be of use in a variety of contexts but is outside the scope of what is possible given the present data.
+Data was accessed: http://www.nyc.gov/html/nypd/html/analysis_and_planning/historical_nyc_crime_data.shtml
+Date accessed: April 5, 2017
